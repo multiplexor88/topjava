@@ -75,4 +75,8 @@ public class Meal extends BaseEntity {
                 ", calories=" + calories +
                 '}';
     }
+
+    public boolean isNew() {
+        return id == null;
+    }
 }

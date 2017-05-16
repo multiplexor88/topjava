@@ -1,9 +1,5 @@
 package ru.javawebinar.topjava.model;
 
-/**
- * @author idumchykov
- * @since 15.05.17
- */
 public class NamedEntity extends BaseEntity {
 
     protected String name;

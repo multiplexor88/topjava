@@ -1,45 +1,30 @@
 package ru.javawebinar.topjava.model;
 
-import ru.javawebinar.topjava.util.MealsUtil;
-
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Set;
 
-/**
- * @author idumchykov
- * @since 15.05.17
- */
+import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
+
 public class User extends NamedEntity {
 
-    public static final String DELETE = "User.delete";
-    public static final String ALL_SORTED = "User.getAllSorted";
-    public static final String BY_EMAIL = "User.getByEmail";
+    private String email;
 
-    protected String email;
+    private String password;
 
-    protected String password;
+    private boolean enabled = true;
 
-    protected boolean enabled = true;
+    private Date registered = new Date();
 
-    protected Date registered = new Date();
+    private Set<Role> roles;
 
-    protected Set<Role> roles;
-
-    protected int caloriesPerDay = MealsUtil.DEFAULT_CALORIES_PER_DAY;
-
-    protected List<Meal> meals;
+    private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
 
     public User() {
     }
 
-    public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getCaloriesPerDay(), u.isEnabled(), u.getRoles());
-    }
-
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-        this(id, name, email, password, MealsUtil.DEFAULT_CALORIES_PER_DAY, true, EnumSet.of(role, roles));
+        this(id, name, email, password, DEFAULT_CALORIES_PER_DAY, true, EnumSet.of(role, roles));
     }
 
     public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Set<Role> roles) {
@@ -48,7 +33,7 @@ public class User extends NamedEntity {
         this.password = password;
         this.caloriesPerDay = caloriesPerDay;
         this.enabled = enabled;
-        this.roles = EnumSet.copyOf(roles);
+        this.roles = roles;
     }
 
     public String getEmail() {
@@ -93,14 +78,6 @@ public class User extends NamedEntity {
 
     public String getPassword() {
         return password;
-    }
-
-    public List<Meal> getMeals() {
-        return meals;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = EnumSet.copyOf(roles);
     }
 
     @Override
